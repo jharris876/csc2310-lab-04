@@ -8,10 +8,29 @@ In this lab you will be practicing the following
 * Use of operations from the String class
 
 ### Pre-work
-This lab assumes that you have Java 11 installed along with the IntelliJ IDE.
+This lab assumes that you have Java 11 installed along with the IntelliJ IDE. It is also useful if you have the CodeTogether plug-in installed. 
+
+Begin by changing your directory to a suitable working directory. Next, download the source code for the lab at your assigned url:
+```text
+$ git clone https://gitlab.csc.tntech.edu/csc2310-sp21-students/yourid/yourid-lab-04.git
+```
 
 ### Sample Data
-The following is a list of sample data that you might expect to be used. Check the data directory for the ``jshark.csv`` file for more examples. **Notice that some of the data varies with some fields missing values and that each data field is encapsulated with quotes (").**
+The codex for this data is the following:
+```text
+frame.number - index of the line of data read from network
+frame.time_relative - time relative to beginning the capture of data from network
+_ws.col.Protocol - character name of the protocol used
+ip.proto - numeric code of the protocol used
+ip.src - source of the data transmission
+ip.dst - destination of the data transmission
+tcp.srcport - port used by the source; of of either tcp or udp is used (but not both)
+tcp.dstport - port used by the destination; of of either tcp or udp is used (but not both)
+udp.srcport - port used by the source; of of either tcp or udp is used (but not both)
+udp.dstport - port used by the destination; of of either tcp or udp is used (but not both)
+```
+
+The following is a list of sample data that you might expect to be used. Check the ``data`` directory for the ``jshark.csv`` file for more examples. **Notice that some of the data varies with some fields missing values and that each data field is encapsulated with quotes (").**
 ```text
 "5","1.436394000","UDP","17","192.168.68.105","192.168.68.255",,,"889","889"
 "6","1.536100000","ARP",,,,,,,
@@ -32,6 +51,9 @@ tshark.
 $ tshark -q -T fields -e frame.number -e frame.time_relative -e _ws.col.Protocol -e ip.proto -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport -e udp.srcport -e udp.dstport -E header=y -E separator=, -E quote=d -E occurrence=f > data.csv
 ```-->
 
+### Importing the source code into IntelliJ
+Begin by starting up IntelliJ. To get to the main dialog, select ``File > Close Project`` and then select ``Open``. At this point, the following window should be displayed. Select the directory that contains the source code for the lab and click ``OK``.
+<img src="docs/LabSetup_0.png" alt="Setup" width="750px"/>
 
 ### Running JUnit
 You will begin this lab by writing and executing your tests. To run the tests you must first configure IntelliJ to recognize your test code and to properly include JUnit4 as your test harness. The directions below describe how to do this.
@@ -68,7 +90,7 @@ public void getProtocol() {
     data = new TSharkData(
         "\"8\",\"1.774700000\",\"TCP\",\"6\",\"192.168.68.126\",\"52.114.159.112\",\"55358\",\"443\",,"
     );
-    assertEquals("Protocol", "TCP", data.getProtocol());
+    assertEquals("Protocol - Line 8", "TCP", data.getProtocol());
 }
 ```
 ### Run Your Tests
@@ -84,7 +106,7 @@ If you choose to run the full test suite you should see results similar to the o
 
 ### Write Your Code
 
-You have been provided a class called ``TSharkData``. You will be implementing the constructor for this class, using the Scanner class to read data and set individual attributes. The following model shows the details of the class.
+You have been provided a class called ``TSharkData``. You will be implementing the constructor for this class, using the ``Scanner`` class to read data and set individual attributes. The following model shows the details of the class.
     <!--![JShark](docs/jsharkUML.png)-->
 <img src="docs/jsharkUML.png" alt="JShark" width="450px"/>
 
