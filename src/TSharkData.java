@@ -12,7 +12,23 @@ public class TSharkData {
     private String dstPort;
 
     public TSharkData(String data){
-    // Your code goes here
+        Scanner scan = new Scanner(data);
+        scan.useDelimiter(",");
+        frameNumber = scan.next().replaceAll("\"", "");
+        frameTime = scan.next().replaceAll("\"", "");
+        protocol = scan.next().replaceAll("\"", "");
+        protocolID = scan.next().replaceAll("\"", "");
+        srcIP = scan.next().replaceAll("\"", "");
+        dstIP= scan.next().replaceAll("\"", "");
+        srcPort = scan.next().replaceAll("\"", "");
+        dstPort = scan.next().replaceAll("\"", "");
+
+        if(srcPort.isEmpty()){
+            srcPort = scan.next().replaceAll("\"", "");
+        }
+        if(dstPort.isEmpty()){
+            dstPort = scan.next().replaceAll("\"", "");
+        }
     }
 
     public String getFrameNumber() {
